@@ -1,4 +1,3 @@
-const { kMaxLength } = require('buffer');
 const mongoose = require('mongoose');
 
 const IncomeSchema = new mongoose.Schema({
@@ -18,11 +17,6 @@ const IncomeSchema = new mongoose.Schema({
         type: String,
         default:"income"
     },
-    date: {
-        type: Date,
-        required: true,
-        trim: true
-    },
     category: {
         type: String,
         required: true,
@@ -34,6 +28,11 @@ const IncomeSchema = new mongoose.Schema({
         trim: true,
         maxLength: 20
     },
+    date: {
+        type: Date,
+        required: true,
+        trim: true
+    }
 },{timestamps:true})
 
-module.exports =mongoose.model('Income',IncomeSchema)
+module.exports =mongoose.model('income',IncomeSchema)
