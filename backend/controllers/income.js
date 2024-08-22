@@ -22,7 +22,28 @@ exports.addIncome =async(req,res) =>{
         res.status(200).json({mesasge:'Income Added'})
     }
     catch (error){
-            console.log(error)
+            res.status(500).json({message: 'Server Error'})
     }
     console.log(income)
+}
+
+exports.getIncome =async(req,res) =>{
+    try{
+        const incomes = await IncomeSchema.find().sort({createdAt: -1})
+        res.status(200).json(incomes)
+    }
+    catch{
+        res.status(500).json({message:'Server Error'})
+    }
+}
+
+exports.deleteIncome =async(req,res) =>{
+    const {id} = req.params;
+    IncomeSchema.findByIdAndDelete(id)
+        .then((income)=>{
+            res.status(200).json({message:'Income Deleted'})
+        })
+        .catch((error)=>{
+            res.status(500).json({message:'Server Error'})
+        })
 }
